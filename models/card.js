@@ -6,7 +6,12 @@ module.exports = function(sequelize, DataTypes) {
     deckId: DataTypes.INTEGER
   }, {})
 
-  
+  Card.associate = function(models) {
+    Card.belongsTo(models.Deck, {
+      as: 'card',
+      foreignKey: 'deckId'
+    })
+  }
 
   return Card
 }
