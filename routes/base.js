@@ -12,6 +12,10 @@ const isAuthenticated = function (req, res, next) {
   res.redirect('/')
 }
 
+router.get('/profile', function(req, res) {
+  res.render('profile')
+})
+
 router.get('/', function(req, res) {
   res.render('login', {
     user: req.user,
@@ -19,8 +23,8 @@ router.get('/', function(req, res) {
   })
 })
 
-router.post('/', passport.authenticate('local', {
-    successRedirect: '/feed',
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/profile',
     failureRedirect: '/',
     failureFlash: true
 }))
