@@ -230,7 +230,7 @@ router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
     }]
   })
   .then(function(data) {
-    
+
     models.Card.destroy({ where: { id: req.params.id } })
     .then(function() {
       res.redirect('/decks/' + data.card.id)
@@ -238,6 +238,28 @@ router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
     .catch(function(err) {
       res.send(err)
     })
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+/*****************************
+  Quiz-specific code
+*****************************/
+
+function shuffle(array) {
+    for (let i = array.length; i; i--) {
+        let j = Math.floor(Math.random() * i)
+        [array[i - 1], array[j]] = [array[j], array[i - 1]]
+    }
+    return array
+}
+
+router.get('/decks/:id/quiz', function(req, res) {
+  models.Card.findAll({ where: { deckId: req.params.id } })
+  .then(function(data) {
+    res.render('quiz', { data: data })
   })
   .catch(function(err) {
     res.send(err)

@@ -4,3 +4,10 @@
   margin: 10px;
   padding: 10px;
 }
+.quizFront {
+  background: red;
+}
+.quizBack {
+  background: blue;
+  display: none;
+}

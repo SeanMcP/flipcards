@@ -2,8 +2,9 @@
 {{#data}}
   <h1>{{name}}</h1>
   <p>{{description}}</p>
-  <p><a href="/decks/{{id}}/edit"><i class="material-icons">edit</i></a></p>
-  <p><a href="/decks/{{id}}/delete"><i class="material-icons">delete</i></a></p>
+  <p><a href="/decks/{{id}}/quiz"><i class="material-icons">play_circle_filled</i> Play the quiz game</a></p>
+  <p><a href="/decks/{{id}}/edit"><i class="material-icons">edit</i> Edit this deck</a></p>
+  <p><a href="/decks/{{id}}/delete"><i class="material-icons">delete</i> Delete this deck</a></p>
   <form action="/decks/{{id}}/cards" method="post">
     <input type="text" name="front" value="" placeholder="Front of card">
     <textarea name="back" rows="2" placeholder="Back of card"></textarea>
