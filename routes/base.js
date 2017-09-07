@@ -156,6 +156,22 @@ router.post('/decks/:id/edit', function(req, res) {
   })
 })
 
+router.get('/decks/:id/delete', function(req, res) {
+  models.Card.destroy({ where: { deckId: req.params.id } })
+  .then(function(data) {
+    models.Deck.destroy({ where: { id: req.params.id } })
+    .then(function(deck) {
+      res.redirect('/profile')
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
 router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
   let newCard = {
     deckId: req.params.id,

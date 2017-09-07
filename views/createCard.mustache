@@ -3,6 +3,7 @@
   <h1>{{name}}</h1>
   <p>{{description}}</p>
   <p><a href="/decks/{{id}}/edit">Edit this deck</a></p>
+  <p><a href="/decks/{{id}}/delete">Delete this deck</a></p>
   <form action="/decks/{{id}}/cards" method="post">
     <input type="text" name="front" value="" placeholder="Front of card">
     <textarea name="back" rows="2" placeholder="Back of card"></textarea>
