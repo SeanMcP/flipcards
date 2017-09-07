@@ -220,24 +220,28 @@ router.post('/cards/:id/edit', isAuthenticated, function(req, res) {
 
 router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
 
-  // Right now, there is no easy way to check to see if the card was created by the user. Consider adding userId to card model.
-
-  models.Card.destroy({ where: { id: req.params.id } })
+  models.Card.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [{
+      model: models.Deck,
+      as: 'card'
+    }]
+  })
   .then(function(data) {
-    res.redirect('back')
+    
+    models.Card.destroy({ where: { id: req.params.id } })
+    .then(function() {
+      res.redirect('/decks/' + data.card.id)
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
   })
   .catch(function(err) {
     res.send(err)
   })
-})
-let thisIsAUser = {
-  id: '12413423532523425',
-  firstname: 'Sean',
-  lastname: 'McPherson',
-  username: 'seanmcp'
-}
-router.get('/api/bro', function(req, res) {
-  res.status(200).json(thisIsAUser)
 })
 
 module.exports = router
