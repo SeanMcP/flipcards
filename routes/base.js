@@ -114,7 +114,6 @@ router.post('/decks', isAuthenticated, function(req, res) {
     description: req.body.description,
     userId: req.user.id
   }
-  console.log('newDeck: ', newDeck)
 
   models.Deck.create(newDeck)
   .then(function(data) {
