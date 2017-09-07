@@ -4,10 +4,55 @@
   margin: 10px;
   padding: 10px;
 }
+.quizItem {
+  margin: 20px auto;
+  width: 500px;
+}
+.cardContainer {
+  position: relative;
+  height: 300px;
+  width: 500px;
+}
+.quizFront, .quizBack {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 300px;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+}
 .quizFront {
   background: red;
+  font-size: 1.5em;
+  font-weight: bold;
+  z-index: 2;
+  transition: opacity 0.2s ease-in-out;
+}
+.quizFront:hover, .quizFront:active {
+  opacity: 0;
 }
 .quizBack {
   background: blue;
-  display: none;
+  font-size: 1.25em;
+  z-index: 1;
+}
+.quizScore {
+  align-content: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+.quizScore a {
+  align-items: center;
+  display: flex;
+  flex: 0 20%;
+  flex-flow: row nowrap;
+  text-decoration: none;
+}
+.quizScore i {
+  margin: 0 10px;
+  text-decoration: none;
 }

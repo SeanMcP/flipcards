@@ -259,11 +259,16 @@ function shuffle(array) {
 router.get('/decks/:id/quiz', function(req, res) {
   models.Card.findAll({ where: { deckId: req.params.id } })
   .then(function(data) {
+    console.log('data.length:\n', data.length)
     res.render('quiz', { data: data })
   })
   .catch(function(err) {
     res.send(err)
   })
+})
+
+router.get('/gameover/:score/:total', function(req, res) {
+  
 })
 
 module.exports = router

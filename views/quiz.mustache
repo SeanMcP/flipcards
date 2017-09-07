@@ -1,12 +1,18 @@
 {{#data}}
   {{#.}}
     <article class="quizItem">
-      <section class="quizFront">
-        {{front}}
-      </section>
-      <section class="quizBack">
-        {{back}}
-      </section>
+      <div class="cardContainer">
+        <section class="quizFront">
+          {{front}}
+        </section>
+        <section class="quizBack">
+          {{back}}
+        </section>
+      </div>
+      <aside class="quizScore">
+        <a href="#" class="scoreButton plus">Got it!<i class="material-icons">thumb_up</i></a>
+        <a href="#" class="scoreButton minus"><i class="material-icons">thumb_down</i>Not yet</a>
+      </aside>
     </article>
   {{/.}}
 {{/data}}
