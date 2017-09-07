@@ -129,7 +129,6 @@ router.get('/decks/:id', isAuthenticated, function(req, res) {
     }]
   })
   .then(function(data) {
-    console.log('DATA!!!!!!!!!!!!', data);
     res.render('createCard', { data: data })
   })
 })
