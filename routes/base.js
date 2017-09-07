@@ -133,6 +133,29 @@ router.get('/decks/:id', isAuthenticated, function(req, res) {
   })
 })
 
+router.get('/decks/:id/edit', function(req, res) {
+  models.Deck.findOne({ where: { id: req.params.id } })
+  .then(function(data) {
+    res.render('editDeck', { data: data })
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.post('/decks/:id/edit', function(req, res) {
+  models.Deck.update({
+    name: req.body.name,
+    description: req.body.description
+  }, { where: { id: req.params.id } })
+  .then(function(data) {
+    res.redirect('/decks/' + req.params.id)
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
 router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
   let newCard = {
     deckId: req.params.id,

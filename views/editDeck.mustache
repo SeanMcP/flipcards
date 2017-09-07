@@ -1,0 +1,7 @@
+{{#data}}
+  <form action="/decks/{{id}}/edit" method="post">
+    <input type="text" name="name" value="{{name}}" placeholder="Title of deck" autofocus>
+    <textarea name="description" rows="2" placeholder="Describe your deck (optional)">{{description}}</textarea>
+    <button type="submit" name="button">Update deck</button>
+  </form>
+{{/data}}
