@@ -21,7 +21,24 @@ describe('GET /', function() {
       .expect(200)
       .then(function(res) {
         expect(res.body).toHaveProperty('status')
+        expect(res.body.status).toBe('success')
         expect(res.body).toHaveProperty('data')
+        expect(res.body.data).toBeTruthy()
+      })
+  })
+})
+
+describe('GET /decks', function() {
+  test('Should send object containing all decks sucessfully', function() {
+    return request(app)
+      .get('/api/decks')
+      .expect(200)
+      .then(function(res) {
+        expect(res.body).toHaveProperty('status')
+        expect(res.body.status).toBe('success')
+        expect(res.body).toHaveProperty('data')
+        expect(res.body.data).toBeTruthy()
+        // expect(res.body.data).toHaveProperty('data.id')
       })
   })
 })
