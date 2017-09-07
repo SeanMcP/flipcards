@@ -2,14 +2,16 @@ const express = require('express')
 const mustacheExpress = require('mustache-express')
 const expressValidator = require('express-validator')
 const path = require('path')
-const routes = require('./routes/base')
+const routesBase = require('./routes/base')
+const routesApi = require('./routes/api')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const BasicStrategy = require('passport-http').BasicStrategy
 const LocalStrategy = require('passport-local').Strategy
 const session = require('express-session')
 const flash = require('express-flash-messages')
-const model = require('./models/index')
+const models = require('./models/index')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
 const app = express()
@@ -40,31 +42,35 @@ app.use(function(req, res, next) {
   next()
 })
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    model.User.findOne({
-      where: {
-        'username': username.toLowerCase()
-      }
-    }).then(function (user) {
-      if (user == null) {
-        return done(null, false, { message: 'Invalid email and/or password: please try again' })
-      }
-      let hashedPassword = bcrypt.hashSync(password, user.salt)
-      if (user.password === hashedPassword) {
-        return done(null, user)
-      }
+const authenticateUser = function(username, password, done) {
+  models.User.findOne({
+    where: {
+      'username': username.toLowerCase()
+    }
+  }).then(function (user) {
+    if (user == null) {
       return done(null, false, { message: 'Invalid email and/or password: please try again' })
-    })
-  }
-))
+    }
+
+    let hashedPassword = bcrypt.hashSync(password, user.salt)
+
+    if (user.password === hashedPassword) {
+      return done(null, user)
+    }
+
+    return done(null, false, { message: 'Invalid email and/or password: please try again' })
+  })
+}
+
+passport.use(new LocalStrategy(authenticateUser))
+passport.use(new BasicStrategy(authenticateUser))
 
 passport.serializeUser(function(user, done) {
   done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done) {
-  model.User.findOne({
+  models.User.findOne({
     where: {
       'id': id
     }
@@ -72,9 +78,13 @@ passport.deserializeUser(function(id, done) {
     if (user == null) {
       done(new Error('Wrong user id'))
     }
+
     done(null, user)
   })
 })
+
+app.use('/api', require('./routes/api'))
+app.use('/', require("./routes/base"))
 
 app.use(function (req, res, next) {
   res.locals.user = req.user
@@ -82,7 +92,8 @@ app.use(function (req, res, next) {
 })
 
 app.use(expressValidator())
-app.use(routes)
+app.use(routesBase)
+app.use(routesApi)
 
 // We have to make sure that we are running on the correct environment for testing purposes
 // When you run the app from the testing file, it will not load the server
