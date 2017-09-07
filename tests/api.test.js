@@ -15,9 +15,13 @@ const app = require('../server')
 // })
 
 describe('GET /', function() {
-  test('Should render sucessfully', function() {
-    return request(app) // When we test app
-      .get('/')         // and go to '/'
-      .expect(200)      // we expect a status of 200
+  test('Should send object sucessfully', function() {
+    return request(app)
+      .get('/api/')
+      .expect(200)
+      .then(function(res) {
+        expect(res.body).toHaveProperty('status')
+        expect(res.body).toHaveProperty('data')
+      })
   })
 })
