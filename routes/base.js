@@ -42,6 +42,11 @@ router.get('/login', function(req, res) {
   })
 })
 
+router.get('/logout', function(req, res) {
+  req.logout()
+  res.redirect('/')
+})
+
 router.get('/signup', function(req, res) {
   res.render('signup', { messages: res.locals.getMessages() })
 })
@@ -113,7 +118,7 @@ router.post('/decks', isAuthenticated, function(req, res) {
 
   models.Deck.create(newDeck)
   .then(function(data) {
-    res.redirect('back')
+    res.redirect('/profile')
   })
   .catch(function(err) {
     res.send(err)
