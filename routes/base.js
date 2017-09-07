@@ -231,5 +231,14 @@ router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
     res.send(err)
   })
 })
+let thisIsAUser = {
+  id: '12413423532523425',
+  firstname: 'Sean',
+  lastname: 'McPherson',
+  username: 'seanmcp'
+}
+router.get('/api/bro', function(req, res) {
+  res.status(200).json(thisIsAUser)
+})
 
 module.exports = router

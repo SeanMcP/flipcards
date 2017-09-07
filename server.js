@@ -86,7 +86,7 @@ app.use(routes)
 
 // We have to make sure that we are running on the correct environment for testing purposes
 // When you run the app from the testing file, it will not load the server
-if (require.main === 'module') {
+if (require.main === module) {
   app.listen(3000, function() {
     console.log('App is running on localhost:3000')
   })
