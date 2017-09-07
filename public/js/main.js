@@ -1,5 +1,12 @@
 let scoreButtons = document.getElementsByClassName('scoreButton')
 let plusButtons = document.getElementsByClassName('plus')
+let quizCards = document.getElementsByClassName('quizCard')
+
+for (var i = 0; i < quizCards.length; i++) {
+  quizCards[i].addEventListener('click', function() {
+    this.classList.toggle('invisible')
+  })
+}
 
 let tally = 0
 let score = 0

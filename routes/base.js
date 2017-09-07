@@ -268,7 +268,10 @@ router.get('/decks/:id/quiz', function(req, res) {
 })
 
 router.get('/gameover/:score/:total', function(req, res) {
-  
+  res.render('gameover', {
+    score: req.params.score,
+    total: req.params.total
+  })
 })
 
 module.exports = router

@@ -1,5 +1,4 @@
 .simpleCard {
-  background: url('./img/card-bg.png') top left repeat-x;
   border: 1px solid #eeeeee;
   margin: 10px;
   padding: 10px;
@@ -25,17 +24,14 @@
   width: 500px;
 }
 .quizFront {
-  background: red;
+  background: pink;
   font-size: 1.5em;
   font-weight: bold;
   z-index: 2;
   transition: opacity 0.2s ease-in-out;
 }
-.quizFront:hover, .quizFront:active {
-  opacity: 0;
-}
 .quizBack {
-  background: blue;
+  background: lightblue;
   font-size: 1.25em;
   z-index: 1;
 }
@@ -55,4 +51,7 @@
 .quizScore i {
   margin: 0 10px;
   text-decoration: none;
+}
+.invisible {
+  opacity: 0;
 }
