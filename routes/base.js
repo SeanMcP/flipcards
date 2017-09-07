@@ -9,11 +9,17 @@ const isAuthenticated = function (req, res, next) {
     return next()
   }
   req.flash('error', 'You have to be logged in to access the page.')
-  res.redirect('/')
+  res.redirect('/login')
 }
 
-router.get('/profile', function(req, res) {
-  res.render('profile')
+router.get('/profile', isAuthenticated, function(req, res) {
+  models.Deck.findAll({ where: { userId: req.user.id } })
+  .then(function(data) {
+    res.render('profile', { data: data})
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
 })
 
 router.get('/', function(req, res) {
@@ -106,6 +112,35 @@ router.post('/decks', isAuthenticated, function(req, res) {
   console.log('newDeck: ', newDeck)
 
   models.Deck.create(newDeck)
+  .then(function(data) {
+    res.redirect('back')
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.get('/decks/:id', isAuthenticated, function(req, res) {
+  models.Deck.findOne({
+    where: { id: req.params.id },
+    include: [{
+      model: models.Card,
+      as: 'cards'
+    }]
+  })
+  .then(function(data) {
+    console.log('DATA!!!!!!!!!!!!', data);
+    res.render('createCard', { data: data })
+  })
+})
+
+router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
+  let newCard = {
+    deckId: req.params.id,
+    front: req.body.front,
+    back: req.body.back
+  }
+  models.Card.create(newCard)
   .then(function(data) {
     res.redirect('back')
   })

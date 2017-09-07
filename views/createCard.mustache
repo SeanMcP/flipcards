@@ -1,0 +1,13 @@
+{{#data}}
+  <h1>{{name}}</h1>
+  <p>{{description}}</p>
+  {{id}}
+  <form action="/decks/{{id}}/cards" method="post">
+    <input type="text" name="front" value="" placeholder="Front of card">
+    <textarea name="back" rows="2" placeholder="Back of card"></textarea>
+    <button type="submit" name="button">Create card</button>
+  </form>
+  {{#cards}}
+    <p>{{front}}</p>
+  {{/cards}}
+{{/data}}
