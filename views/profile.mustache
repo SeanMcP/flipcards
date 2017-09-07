@@ -1,1 +1,9 @@
 <p>Hello, from index.mustache</p>
+<ul>
+  <li><a href="/decks">Create a deck</a></li>
+</ul>
+<ul>
+  {{#data}}
+    <li><a href="/decks/{{id}}">{{name}}</a></li>
+  {{/data}}
+</ul>

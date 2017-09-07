@@ -93,4 +93,25 @@ router.post('/signup', async function(req, res) {
   }
 })
 
+router.get('/decks', function(req, res) {
+  res.render('createDeck')
+})
+
+router.post('/decks', isAuthenticated, function(req, res) {
+  let newDeck = {
+    name: req.body.name,
+    description: req.body.description,
+    userId: req.user.id
+  }
+  console.log('newDeck: ', newDeck)
+
+  models.Deck.create(newDeck)
+  .then(function(data) {
+    res.redirect('back')
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
 module.exports = router
