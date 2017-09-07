@@ -1,3 +1,4 @@
+<a href="/profile">&lt; Back to profile</a>
 {{#data}}
   <h1>{{name}}</h1>
   <p>{{description}}</p>
@@ -11,7 +12,8 @@
     <div class="simpleCard">
       <h3>{{front}}</h3>
       <p>{{back}}</p>
-      <p><a href="/cards/{{id}}">Delete</a></p>
+      <p><a href="/cards/{{id}}/edit">Edit</a></p>
+      <p><a href="/cards/{{id}}/delete">Delete</a></p>
     </div>
   {{/cards}}
 {{/data}}

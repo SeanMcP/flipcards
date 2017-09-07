@@ -171,7 +171,34 @@ router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
   })
 })
 
-router.get('/cards/:id', isAuthenticated, function(req, res) {
+router.get('/cards/:id/edit', isAuthenticated, function(req, res) {
+  models.Card.findOne({ where: { id: req.params.id } })
+  .then(function(data) {
+    res.render('editCard', { data: data })
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.post('/cards/:id/edit', isAuthenticated, function(req, res) {
+  models.Card.update({
+    front: req.body.front,
+    back: req.body.back
+  },
+  {
+    where: { id: req.params.id }
+  })
+  .then(function(data) {
+    // Find a way to redirect back to the deck view
+    res.redirect('/profile')
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
 
   // Right now, there is no easy way to check to see if the card was created by the user. Consider adding userId to card model.
 

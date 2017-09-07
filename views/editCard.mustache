@@ -1,0 +1,7 @@
+{{#data}}
+  <form action="/cards/{{id}}/edit" method="post">
+    <input type="text" name="front" value="{{front}}" placeholder="Front of card">
+    <textarea name="back" rows="2" placeholder="Back of card">{{back}}</textarea>
+    <button type="submit" name="button">Edit card</button>
+  </form>
+{{/data}}
