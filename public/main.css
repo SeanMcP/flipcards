@@ -1,4 +1,5 @@
 .simpleCard {
+  background: url('./img/notecard-bg.png') top left repeat-x;
   border: 1px solid #eeeeee;
   margin: 10px;
   padding: 10px;
