@@ -268,7 +268,7 @@ router.get('/decks/:id/quiz', function(req, res) {
       newArr.push(splicedIndex)
     }
 
-    res.render('quiz', { data: newArr })
+    res.render('quiz', { user: req.user, data: newArr })
   })
   .catch(function(err) {
     res.send(err)
@@ -289,6 +289,7 @@ router.get('/gameover/:score/:total', function(req, res) {
   }
   calc = calc.toFixed(2) * 100;
   res.render('gameover', {
+    user: req.user,
     score: req.params.score,
     total: req.params.total,
     calc: calc,

@@ -20,7 +20,7 @@ form.login {
 }
 .login > * {
   font-size: 1em;
-  margin: 10px 10px 0;
+  margin: 10px 0 0;
   padding: 10px;
 }
 .login input {
@@ -31,6 +31,7 @@ form.login {
 header {
   align-items: center;
   background: #2196F3;
+  color: white;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -45,10 +46,14 @@ main {
 footer {
   align-items: center;
   background: #0D47A1;
+  bottom: 0;
+  color: white;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  left: 0;
   padding: 20px 0;
+  width: 100%;
 }
 footer > * {
   margin: 0 20px;
@@ -62,10 +67,27 @@ footer > * {
   font-weight: 700;
 }
 
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+header a:hover, header a:active {
+  background: #1E88E5;
+}
+
 .align-center {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
+}
+.capitalize {
+  text-transform: capitalize;
 }
 .flex-row {
   display: flex;
@@ -82,8 +104,8 @@ footer > * {
   border: 1px solid #eeeeee;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   flex: 1 50%;
-  margin: 10px;
-  padding: 10px;
+  margin: 15px;
+  padding: 15px;
 }
 .simpleCard a {
   text-decoration: none;
@@ -165,6 +187,9 @@ footer > * {
 }
 .quizFront, .quizBack {
   align-items: center;
+  background: white;
+  border: 1px solid #eeeeee;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-flow: row nowrap;
   height: 300px;
@@ -175,29 +200,38 @@ footer > * {
   width: 500px;
 }
 .quizFront {
-  background: pink;
   font-size: 1.5em;
   font-weight: bold;
   z-index: 2;
   transition: opacity 0.2s ease-in-out;
 }
 .quizBack {
-  background: lightblue;
+  background: #e0e0e0;
   font-size: 1.25em;
   z-index: 1;
 }
 .quizScore {
   align-content: center;
+  border-bottom: 1px solid #E0E0E0;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  margin: 15px auto;
+  padding-bottom: 15px;
 }
 .quizScore a {
   align-items: center;
+  color: #BDBDBD;
   display: flex;
   flex: 0 20%;
   flex-flow: row nowrap;
   text-decoration: none;
+}
+.plus:hover, .plus:active {
+  color: #8BC34A;
+}
+.minus:hover, .minus:active {
+  color: #F44336;
 }
 .quizScore i {
   margin: 0 10px;

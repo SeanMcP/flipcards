@@ -1,9 +1,23 @@
-<p>Hello, from index.mustache</p>
-<ul>
-  <li><a href="/decks">Create a deck</a></li>
-</ul>
-<ul>
-  {{#data}}
-    <li><a href="/decks/{{id}}">{{name}}</a></li>
-  {{/data}}
-</ul>
+<section class="flex-row">
+  <section class="leftSide">
+    <div class="simpleCard">
+      <h1 class="capitalize">Hello {{#user}}{{username}}{{/user}}!</h1>
+    </div>
+    <div class="simpleCard">
+      <h1>Add a new deck</h1>
+      <form action="/decks" method="post" class="createCard">
+        <input type="text" name="name" value="" placeholder="Title of deck" autofocus>
+        <textarea name="description" rows="2" placeholder="Describe your deck (optional)"></textarea>
+        <button type="submit" name="button">Create deck</button>
+      </form>
+    </div>
+  </section>
+  <section class="rightSide">
+    {{#data}}
+      <div class="simpleCard displayDeck">
+        <h1><a href="/decks/{{id}}">{{name}}</a></h1>
+        <p class="description">{{description}}</p>
+      </div>
+    {{/data}}
+  </section>
+</section>
