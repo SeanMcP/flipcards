@@ -15,7 +15,7 @@ const isAuthenticated = function (req, res, next) {
 router.get('/profile', isAuthenticated, function(req, res) {
   models.Deck.findAll({ where: { userId: req.user.id } })
   .then(function(data) {
-    res.render('profile', { data: data})
+    res.render('profile', { user: req.user, data: data })
   })
   .catch(function(err) {
     res.send(err)
@@ -133,14 +133,14 @@ router.get('/decks/:id', isAuthenticated, function(req, res) {
     }]
   })
   .then(function(data) {
-    res.render('createCard', { data: data })
+    res.render('createCard', { user: req.user, data: data })
   })
 })
 
 router.get('/decks/:id/edit', function(req, res) {
   models.Deck.findOne({ where: { id: req.params.id } })
   .then(function(data) {
-    res.render('editDeck', { data: data })
+    res.render('editDeck', { user: req.user, data: data })
   })
   .catch(function(err) {
     res.send(err)
@@ -194,7 +194,7 @@ router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
 router.get('/cards/:id/edit', isAuthenticated, function(req, res) {
   models.Card.findOne({ where: { id: req.params.id } })
   .then(function(data) {
-    res.render('editCard', { data: data })
+    res.render('editCard', { user: req.user, data: data })
   })
   .catch(function(err) {
     res.send(err)
@@ -259,7 +259,7 @@ function shuffleArr(arr) {
 router.get('/decks/:id/quiz', function(req, res) {
   models.Card.findAll({ where: { deckId: req.params.id } })
   .then(function(data) {
-    
+
     let length = data.length
     let newArr = []
 
