@@ -1,7 +1,10 @@
 {{#data}}
-  <form action="/decks/{{id}}/edit" method="post">
+<div class="simpleCard max-width">
+  <h1>Edit a deck</h1>
+  <form action="/decks/{{id}}/edit" method="post" class="createCard">
     <input type="text" name="name" value="{{name}}" placeholder="Title of deck" autofocus>
     <textarea name="description" rows="2" placeholder="Describe your deck (optional)">{{description}}</textarea>
-    <button type="submit" name="button">Update deck</button>
+    <button type="submit" name="button">Edit deck</button>
   </form>
+</div>
 {{/data}}
