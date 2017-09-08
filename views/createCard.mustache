@@ -1,21 +1,32 @@
-<a href="/profile">&lt; Back to profile</a>
 {{#data}}
-  <h1>{{name}}</h1>
-  <p>{{description}}</p>
-  <p><a href="/decks/{{id}}/quiz"><i class="material-icons">play_circle_filled</i> Play the quiz game</a></p>
-  <p><a href="/decks/{{id}}/edit"><i class="material-icons">edit</i> Edit this deck</a></p>
-  <p><a href="/decks/{{id}}/delete"><i class="material-icons">delete</i> Delete this deck</a></p>
-  <form action="/decks/{{id}}/cards" method="post">
-    <input type="text" name="front" value="" placeholder="Front of card">
-    <textarea name="back" rows="2" placeholder="Back of card"></textarea>
-    <button type="submit" name="button">Create card</button>
-  </form>
-  {{#cards}}
-    <div class="simpleCard">
-      <h3>{{front}}</h3>
-      <p>{{back}}</p>
-      <p><a href="/cards/{{id}}/edit"><i class="material-icons">edit</i></a></p>
-      <p><a href="/cards/{{id}}/delete"><i class="material-icons">delete</i></a></p>
-    </div>
-  {{/cards}}
+  <section class="flex-row">
+    <section class="leftSide">
+      <div class="simpleCard">
+        <h1>{{name}}</h1>
+        <p class="description">{{description}}</p>
+        <p><a href="/decks/{{id}}/quiz" class="align-center"><i class="material-icons">play_circle_filled</i> Play the quiz game</a></p>
+        <p><a href="/decks/{{id}}/edit" class="align-center"><i class="material-icons">edit</i> Edit this deck</a></p>
+        <p><a href="/decks/{{id}}/delete" class="align-center"><i class="material-icons">delete</i> Delete this deck</a></p>
+      </div>
+      <div class="simpleCard">
+        <h1>Add a card</h1>
+        <form action="/decks/{{id}}/cards" method="post" class="createCard">
+          <input type="text" name="front" value="" placeholder="Front of card">
+          <textarea name="back" rows="2" placeholder="Back of card"></textarea>
+          <button type="submit" name="button">Add card</button>
+        </form>
+      </div>
+    </section>
+    <section class="rightSide">
+      {{#cards}}
+      <div class="simpleCard displayCard">
+        <h2>{{front}}</h2>
+        <p class="body">{{back}}</p>
+        <div class="links">
+          <a href="/cards/{{id}}/edit"><i class="material-icons">edit</i></a><a href="/cards/{{id}}/delete"><i class="material-icons">delete</i></a>
+        </div>
+      </div>
+      {{/cards}}
+    </section>
+  </section>
 {{/data}}

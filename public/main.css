@@ -7,20 +7,152 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 body, body * {
   font-family: 'Roboto', Helvetica, sans-serif;
 }
+body {
+  background: #F5F5F5;
+}
 
 /***** Login forms *****/
 
+form.login {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-bottom: 10px;
+}
+.login > * {
+  font-size: 1em;
+  margin: 10px 10px 0;
+  padding: 10px;
+}
+.login input {
+}
+
+/***** General layout *****/
+
+header {
+  align-items: center;
+  background: #2196F3;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+header > * {
+  margin: 0 20px;
+}
+main {
+  margin: 10px;
+}
+footer {
+  align-items: center;
+  background: #0D47A1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+footer > * {
+  margin: 0 20px;
+}
+
+/***** Header *****/
+
+#logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
+}
 
 .align-center {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
 }
-
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.leftSide {
+  flex: 0 40%;
+}
+.rightSide {
+  flex: 0 60%;
+}
 .simpleCard {
+  background: white;
   border: 1px solid #eeeeee;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  flex: 1 50%;
   margin: 10px;
   padding: 10px;
+}
+.simpleCard a {
+  text-decoration: none;
+}
+.simpleCard i {
+  margin-right: 5px;
+}
+.simpleCard h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.simpleCard h2 {
+  border-bottom: 1px solid pink;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.simpleCard p.body {
+  font-size: 1em;
+  margin: 20px 0 0;
+}
+.description {
+  font-style: italic;
+  margin: 10px 0;
+}
+.createCard {
+  display: flex;
+  flex-flow: column;
+}
+.createCard > * {
+  border: 0;
+  font-size: 1em;
+  margin: 0 0 10px;
+  padding: 10px;
+}
+.createCard input, .createCard textarea {
+  background: #F5F5F5;
+  resize: none;
+}
+.createCard input {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.max-width {
+  margin: 20px auto;
+  max-width: 50%;
+  width: 100%;
+}
+.displayCard {
+  margin: 10px;
+  padding: 10px 0;
+}
+.displayCard h2 {
+  padding: 0 10px 5px;
+}
+.displayCard p {
+  padding: 0 10px;
+}
+.displayCard .links {
+  color: #333;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+.links a {
+  color: #E0E0E0;
+}
+.links a:hover, .links a:active {
+  color: #BDBDBD;
 }
 .quizItem {
   margin: 20px auto;

@@ -184,7 +184,7 @@ router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
   }
   models.Card.create(newCard)
   .then(function(data) {
-    res.redirect('back')
+    res.redirect('/decks/' + req.params.id)
   })
   .catch(function(err) {
     res.send(err)
@@ -248,19 +248,38 @@ router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
   Quiz-specific code
 *****************************/
 
-function shuffle(array) {
-    for (let i = array.length; i; i--) {
-        let j = Math.floor(Math.random() * i)
-        [array[i - 1], array[j]] = [array[j], array[i - 1]]
-    }
-    return array
+// function shuffle(array) {
+//     for (let i = array.length; i; i--) {
+//         let j = Math.floor(Math.random() * i)
+//         [array[i - 1], array[j]] = [array[j], array[i - 1]]
+//     }
+//     return array
+// }
+
+function shuffleArr(arr) {
+  let newArr = []
+  while (arr) {
+    newArr.push(arr.splice(Math.floor(Math.random() * arr.length)))
+  }
+  return newArr
 }
 
 router.get('/decks/:id/quiz', function(req, res) {
   models.Card.findAll({ where: { deckId: req.params.id } })
   .then(function(data) {
-    console.log('data.length:\n', data.length)
-    res.render('quiz', { data: data })
+    let length = data.length
+    // console.log('data*********\n', data)
+    let newArr = []
+    for (let i = 0; i < length; i++) {
+      console.log('data.length', data.length);
+      let iDunSplicedThis = (data.splice(Math.floor(Math.random() * data.length), 1)[0])
+      newArr.push(iDunSplicedThis)
+      console.log('*****\n*********\n*************\n', iDunSplicedThis);
+    }
+
+    console.log('newArr*******\n', newArr)
+
+    res.render('quiz', { data: newArr })
   })
   .catch(function(err) {
     res.send(err)
@@ -268,9 +287,23 @@ router.get('/decks/:id/quiz', function(req, res) {
 })
 
 router.get('/gameover/:score/:total', function(req, res) {
+  let calc = req.params.score / req.params.total
+  let message = ''
+  if(calc === 1) {
+    message = 'Well done! You aced it!'
+  } else if (calc > 0.83) {
+    message = 'Almost there!'
+  } else if (calc > 0.66) {
+    message = 'Keep studying!'
+  } else {
+    message = 'Put some more time into studying'
+  }
+  calc = calc.toFixed(2) * 100;
   res.render('gameover', {
     score: req.params.score,
-    total: req.params.total
+    total: req.params.total,
+    calc: calc,
+    message: message
   })
 })
 
