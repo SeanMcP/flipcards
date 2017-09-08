@@ -44,7 +44,7 @@ router.post('/decks', passport.authenticate('basic', { session: false }), functi
 
   models.Deck.create(newDeck)
   .then(function(data) {
-    res.status(200).send(sendFunc('succuss', data))
+    res.status(200).send(sendFunc('success', data))
   })
   .catch(function(err) {
     res.status(304).send(sendFunc('fail', err))
