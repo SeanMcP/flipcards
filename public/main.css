@@ -98,6 +98,10 @@ header a:hover, header a:active {
 .capitalize {
   text-transform: capitalize;
 }
+.center {
+  text-align: center;
+  margin-top: 15px;
+}
 .flex-row {
   display: flex;
   flex-flow: row nowrap;
@@ -127,7 +131,6 @@ header a:hover, header a:active {
   font-weight: 700;
 }
 .simpleCard h2 {
-  /*border-bottom: 1px solid pink;*/
   font-size: 1.25em;
   font-weight: bold;
 }
@@ -194,13 +197,15 @@ button:hover, button:active {
   justify-content: flex-end;
 }
 .links a {
-  color: #E0E0E0;
+  color: rgba(0, 0, 0, 0.2);
 }
 .links a:hover, .links a:active {
-  color: #BDBDBD;
+  color: rgba(0, 0, 0, 0.3);
 }
 .quizItem {
+  border-top: 1px solid #E0E0E0;
   margin: 20px auto;
+  padding-top: 30px;
   width: 500px;
 }
 .cardContainer {
@@ -237,18 +242,16 @@ button:hover, button:active {
   transition: opacity 0.2s ease-in-out;
 }
 .quizBack {
-  background: #e0e0e0;
+  background: white url('/img/card-bg.png') top left repeat-x;
   font-size: 1.25em;
   z-index: 1;
 }
 .quizScore {
   align-content: center;
-  border-bottom: 1px solid #E0E0E0;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   margin: 15px auto;
-  padding-bottom: 15px;
 }
 .quizScore a {
   align-items: center;
