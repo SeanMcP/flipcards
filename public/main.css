@@ -3,7 +3,15 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 @import url('https://fonts.googleapis.com/css?family=Patrick+Hand|Roboto:300,400,700');
 
 /***** Begin styles *****/
-
+input:focus, textarea:focus {
+  outline-color: : #2196F3;
+}
+a {
+  color: #2196F3;
+}
+a:hover, a:active {
+  color: #1976D2;
+}
 body, body * {
   font-family: 'Roboto', Helvetica, sans-serif;
 }
@@ -78,6 +86,7 @@ header a {
   padding: 10px;
 }
 header a:hover, header a:active {
+  color: white;
   background: #1E88E5;
 }
 
@@ -116,7 +125,6 @@ header a:hover, header a:active {
 .simpleCard h1 {
   font-size: 2em;
   font-weight: 700;
-  margin: 0 0 10px;
 }
 .simpleCard h2 {
   border-bottom: 1px solid pink;
@@ -129,7 +137,7 @@ header a:hover, header a:active {
 }
 .description {
   font-style: italic;
-  margin: 10px 0;
+  margin: 15px 0 0;
 }
 .createCard {
   display: flex;
@@ -138,7 +146,7 @@ header a:hover, header a:active {
 .createCard > * {
   border: 0;
   font-size: 1em;
-  margin: 0 0 10px;
+  margin: 10px 0 0;
   padding: 10px;
 }
 .createCard input, .createCard textarea {
@@ -149,10 +157,24 @@ header a:hover, header a:active {
   font-size: 1.25em;
   font-weight: bold;
 }
+button {
+  border: none;
+  cursor: pointer;
+}
+button:hover, button:active {
+  background: linear-gradient(#2196F3, #1E88E5);
+  color: white;
+}
 .max-width {
   margin: 20px auto;
   max-width: 50%;
   width: 100%;
+}
+.deckLinks {
+  margin: 15px 0 0;
+}
+.deckLinks p {
+  margin: 5px 0 0;
 }
 .displayCard {
   margin: 10px;

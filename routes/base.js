@@ -201,6 +201,16 @@ router.get('/cards/:id/edit', isAuthenticated, function(req, res) {
   })
 })
 
+router.get('/decks/:deckId/cards/:id/edit', isAuthenticated, function(req, res) {
+  models.Card.findOne({ where: { id: req.params.id } })
+  .then(function(data) {
+    res.render('editCard', { user: req.user, data: data })
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
 router.post('/cards/:id/edit', isAuthenticated, function(req, res) {
   models.Card.update({
     front: req.body.front,
@@ -212,6 +222,22 @@ router.post('/cards/:id/edit', isAuthenticated, function(req, res) {
   .then(function(data) {
     // Find a way to redirect back to the deck view
     res.redirect('/profile')
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.post('/decks/:deckId/cards/:id/edit', isAuthenticated, function(req, res) {
+  models.Card.update({
+    front: req.body.front,
+    back: req.body.back
+  },
+  {
+    where: { id: req.params.id }
+  })
+  .then(function(data) {
+    res.redirect('/decks/' + req.params.deckId)
   })
   .catch(function(err) {
     res.send(err)

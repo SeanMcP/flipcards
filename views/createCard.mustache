@@ -4,9 +4,11 @@
       <div class="simpleCard">
         <h1>{{name}}</h1>
         <p class="description">{{description}}</p>
-        <p><a href="/decks/{{id}}/quiz" class="align-center"><i class="material-icons">play_circle_filled</i> Play the quiz game</a></p>
-        <p><a href="/decks/{{id}}/edit" class="align-center"><i class="material-icons">edit</i> Edit this deck</a></p>
-        <p><a href="/decks/{{id}}/delete" class="align-center"><i class="material-icons">delete</i> Delete this deck</a></p>
+        <section class="deckLinks">
+          <p><a href="/decks/{{id}}/quiz" class="align-center"><i class="material-icons">play_circle_filled</i> Play the quiz game</a></p>
+          <p><a href="/decks/{{id}}/edit" class="align-center"><i class="material-icons">edit</i> Edit this deck</a></p>
+          <p><a href="/decks/{{id}}/delete" class="align-center"><i class="material-icons">delete</i> Delete this deck</a></p>
+        </section>
       </div>
       <div class="simpleCard">
         <h1>Add a card</h1>
@@ -23,7 +25,7 @@
         <h2>{{front}}</h2>
         <p class="body">{{back}}</p>
         <div class="links">
-          <a href="/cards/{{id}}/edit"><i class="material-icons">edit</i></a><a href="/cards/{{id}}/delete"><i class="material-icons">delete</i></a>
+          <a href="/decks/{{deckId}}/cards/{{id}}/edit"><i class="material-icons">edit</i></a><a href="/cards/{{id}}/delete"><i class="material-icons">delete</i></a>
         </div>
       </div>
       {{/cards}}
