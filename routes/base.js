@@ -15,7 +15,11 @@ const isAuthenticated = function (req, res, next) {
 router.get('/profile', isAuthenticated, function(req, res) {
   models.Deck.findAll({ where: { userId: req.user.id } })
   .then(function(data) {
-    res.render('profile', { user: req.user, data: data })
+    res.render('profile', {
+      user: req.user,
+      data: data,
+      messages: res.locals.getMessages()
+    })
   })
   .catch(function(err) {
     res.send(err)
@@ -51,33 +55,32 @@ router.get('/signup', function(req, res) {
   res.render('signup', { messages: res.locals.getMessages() })
 })
 
-router.post('/signup', async function(req, res) {
+router.post('/signup', function(req, res) {
 
-  req.checkBody('username', 'Please choose a username').notEmpty()
-  req.checkBody('password', 'Please choose a password').notEmpty()
-  req.checkBody('username', 'Usernames can only contain letters and numbers').isAlphanumeric()
-  req.checkBody('username', 'Usernames should be between 4 and 20 characters').len(4, 20)
-  req.checkBody('password', 'Passwords should be between 4 and 20 characters').len(4, 20)
-
-  let isError = false
-
-  let errors = await req.getValidationResult()
-
-  errors.array().map(function(error){
-    isError = true
-    req.flash('error', error.msg)
-  })
+  // req.checkBody('username', 'Please choose a username').notEmpty()
+  // req.checkBody('password', 'Please choose a password').notEmpty()
+  // req.checkBody('username', 'Usernames can only contain letters and numbers').isAlphanumeric()
+  // req.checkBody('username', 'Usernames should be between 4 and 20 characters').len(4, 20)
+  // req.checkBody('password', 'Passwords should be between 4 and 20 characters').len(4, 20)
+  //
+  // let isError = false
+  //
+  // let errors = req.getValidationResult()
+  //
+  // errors.array().map(function(error){
+  //   isError = true
+  //   req.flash('error', error.msg)
+  // })
 
   let username = req.body.username.toLowerCase()
   let password = req.body.password
   let confirm = req.body.confirm
 
   if (!username || !password) {
-    res.flash('error', 'Please fill in all the fields')
+    req.flash('error', 'Please fill in all the fields')
     res.redirect('/signup')
   } else if (password !== confirm) {
     req.flash('error', 'Passwords to not match.')
-
     res.redirect('/signup')
   } else if (isError) {
     res.redirect('/signup')
@@ -109,19 +112,24 @@ router.get('/decks', function(req, res) {
 })
 
 router.post('/decks', isAuthenticated, function(req, res) {
-  let newDeck = {
-    name: req.body.name,
-    description: req.body.description,
-    userId: req.user.id
-  }
+  if(req.body.name) {
+    let newDeck = {
+      name: req.body.name,
+      description: req.body.description,
+      userId: req.user.id
+    }
 
-  models.Deck.create(newDeck)
-  .then(function(data) {
-    res.redirect('/profile')
-  })
-  .catch(function(err) {
-    res.send(err)
-  })
+    models.Deck.create(newDeck)
+    .then(function(data) {
+      res.redirect('/profile')
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  } else {
+    req.flash('Decks must have a title')
+    res.redirect('back')
+  }
 })
 
 router.get('/decks/:id', isAuthenticated, function(req, res) {
@@ -133,14 +141,22 @@ router.get('/decks/:id', isAuthenticated, function(req, res) {
     }]
   })
   .then(function(data) {
-    res.render('deck', { user: req.user, data: data })
+    res.render('deck', {
+      user: req.user,
+      data: data,
+      messages: res.locals.getMessages()
+    })
   })
 })
 
 router.get('/decks/:id/edit', isAuthenticated, function(req, res) {
   models.Deck.findOne({ where: { id: req.params.id } })
   .then(function(data) {
-    res.render('editDeck', { user: req.user, data: data })
+    res.render('editDeck', {
+      user: req.user,
+      data: data,
+      messages: res.locals.getMessages()
+    })
   })
   .catch(function(err) {
     res.send(err)
@@ -148,16 +164,21 @@ router.get('/decks/:id/edit', isAuthenticated, function(req, res) {
 })
 
 router.post('/decks/:id/edit', isAuthenticated, function(req, res) {
-  models.Deck.update({
-    name: req.body.name,
-    description: req.body.description
-  }, { where: { id: req.params.id } })
-  .then(function(data) {
-    res.redirect('/decks/' + req.params.id)
-  })
-  .catch(function(err) {
-    res.send(err)
-  })
+  if(req.body.name) {
+    models.Deck.update({
+      name: req.body.name,
+      description: req.body.description
+    }, { where: { id: req.params.id } })
+    .then(function(data) {
+      res.redirect('/decks/' + req.params.id)
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  } else {
+    req.flash('Decks must have a title')
+    res.redirect('back')
+  }
 })
 
 router.get('/decks/:id/delete', function(req, res) {
@@ -177,24 +198,33 @@ router.get('/decks/:id/delete', function(req, res) {
 })
 
 router.post('/decks/:id/cards', isAuthenticated, function(req, res) {
-  let newCard = {
-    deckId: req.params.id,
-    front: req.body.front,
-    back: req.body.back
+  if(req.body.front && req.body.back) {
+    let newCard = {
+      deckId: req.params.id,
+      front: req.body.front,
+      back: req.body.back
+    }
+    models.Card.create(newCard)
+    .then(function(data) {
+      res.redirect('/decks/' + req.params.id)
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  } else {
+    req.flash('Flipcards need a front and back')
+    res.redirect('back')
   }
-  models.Card.create(newCard)
-  .then(function(data) {
-    res.redirect('/decks/' + req.params.id)
-  })
-  .catch(function(err) {
-    res.send(err)
-  })
 })
 
 router.get('/decks/:deckId/cards/:id/edit', isAuthenticated, function(req, res) {
   models.Card.findOne({ where: { id: req.params.id } })
   .then(function(data) {
-    res.render('editCard', { user: req.user, data: data })
+    res.render('editCard', {
+      user: req.user,
+      data: data,
+      messages: res.locals.getMessages()
+    })
   })
   .catch(function(err) {
     res.send(err)
@@ -202,19 +232,24 @@ router.get('/decks/:deckId/cards/:id/edit', isAuthenticated, function(req, res) 
 })
 
 router.post('/decks/:deckId/cards/:id/edit', isAuthenticated, function(req, res) {
-  models.Card.update({
-    front: req.body.front,
-    back: req.body.back
-  },
-  {
-    where: { id: req.params.id }
-  })
-  .then(function(data) {
-    res.redirect('/decks/' + req.params.deckId)
-  })
-  .catch(function(err) {
-    res.send(err)
-  })
+  if(req.body.front && req.body.back) {
+    models.Card.update({
+      front: req.body.front,
+      back: req.body.back
+    },
+    {
+      where: { id: req.params.id }
+    })
+    .then(function(data) {
+      res.redirect('/decks/' + req.params.deckId)
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  } else {
+    req.flash('Flipcards need a front and back')
+    res.redirect('back')
+  }
 })
 
 router.get('/cards/:id/delete', isAuthenticated, function(req, res) {

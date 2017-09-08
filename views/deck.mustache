@@ -18,6 +18,11 @@
           <button type="submit" name="button">Add card</button>
         </form>
       </div>
+      {{#messages.error}}
+        <div class="errorMessages">
+          <p>{{.}}</p>
+        </div>
+      {{/messages.error}}
     </section>
     <section class="rightSide">
       {{#cards}}

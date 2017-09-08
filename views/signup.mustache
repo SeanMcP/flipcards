@@ -8,3 +8,8 @@
   </form>
   <p class="center">Already have an account? <a href="/login">Login!</a></p>
 </div>
+{{#messages.error}}
+  <div class="errorMessages">
+    <p>{{.}}</p>
+  </div>
+{{/messages.error}}

@@ -7,3 +7,8 @@
   </form>
   <p class="center">Don't have an account? <a href="/signup">Sign up!</a></p>
 </div>
+{{#messages.error}}
+  <div class="errorMessages">
+    <p>{{.}}</p>
+  </div>
+{{/messages.error}}
