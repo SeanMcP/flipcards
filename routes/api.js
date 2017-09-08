@@ -30,9 +30,9 @@ router.get('/decks', passport.authenticate('basic', { session: false }), functio
   .then(function(data) {
     res.status(200).send(sendFunc('success', data))
   })
-  .catch(function(err) {
-    res.status(400).send(sendFunc('fail', err))
-  })
+  // .catch(function(err) {
+  //   res.status(400).send(sendFunc('fail', err))
+  // })
 })
 
 router.post('/decks', passport.authenticate('basic', { session: false }), function(req, res) {

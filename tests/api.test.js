@@ -28,6 +28,25 @@ describe('GET /', function() {
   })
 })
 
+describe('GET /me', function() {
+  test('Should send object sucessfully', function() {
+    return request(app)
+      .get('/me')
+      .expect(200)
+  })
+})
+
+// describe('GET /me', function() {
+//   test('Should return a json object', function() {
+//     return request(app)
+//       .get('/me')
+//       .expect(200)
+//       .then(function(res) {
+//         expect(res.body).toBeTruthy()
+//       })
+//   })
+// })
+
 describe('GET /decks', function() {
   test('Should send object containing all decks sucessfully', function() {
     return request(app)
