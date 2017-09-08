@@ -105,7 +105,7 @@ router.post('/signup', async function(req, res) {
 })
 
 router.get('/decks', function(req, res) {
-  res.render('createDeck')
+  res.redirect('/profile')
 })
 
 router.post('/decks', isAuthenticated, function(req, res) {
