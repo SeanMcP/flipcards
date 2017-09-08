@@ -161,6 +161,7 @@ header a:hover, header a:active {
   font-weight: bold;
 }
 button {
+  background: linear-gradient(#E0E0E0, #BDBDBD);
   border: none;
   cursor: pointer;
 }
