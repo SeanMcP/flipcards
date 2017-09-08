@@ -177,8 +177,8 @@ button:hover, button:active {
   margin: 5px 0 0;
 }
 .displayCard {
-  margin: 10px;
-  padding: 10px 0;
+  margin: 15px;
+  padding: 15px 0;
 }
 .displayCard h2 {
   padding: 0 10px 5px;
@@ -261,4 +261,29 @@ button:hover, button:active {
 }
 .invisible {
   opacity: 0;
+}
+.gameover {
+  text-align: center;
+  margin: 15px auto;
+  max-width: 500px;
+  width: 100%;
+}
+.gameover * {
+  padding: 10px 0;
+}
+.gameover h1 {
+  font-size: 6em;
+}
+.gameover h2 {
+  border: none;
+  font-size: 3em;
+}
+.gameover p {
+  font-size: 2em;
+}
+.gameover a {
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.5em;
+  margin-top: 15px;
+  padding: 15px 30px;
 }

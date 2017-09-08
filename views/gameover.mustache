@@ -1,5 +1,12 @@
-<h2>You got:</h2>
-<h1>{{score}} / {{total}}</h1>
-<h1>{{calc}}%</h1>
-<p>{{message}}</p>
-<a href="/profile">Back to profile</a>
+<div class="simpleCard gameover">
+  <h2>You got:</h2>
+  <h1>{{score}} / {{total}}</h1>
+  <h1>{{calc}}%</h1>
+  <p>{{message}}</p>
+  {{#user}}
+    <p><a href="/profile">Back to profile</a></p>
+  {{/user}}
+  {{^user}}
+    <p><a href="/login">Login and create your own!</a></p>
+  {{/user}}
+</div>
