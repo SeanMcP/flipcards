@@ -248,14 +248,6 @@ router.get('/cards/:id/delete', isAuthenticated, function(req, res) {
   Quiz-specific code
 *****************************/
 
-// function shuffle(array) {
-//     for (let i = array.length; i; i--) {
-//         let j = Math.floor(Math.random() * i)
-//         [array[i - 1], array[j]] = [array[j], array[i - 1]]
-//     }
-//     return array
-// }
-
 function shuffleArr(arr) {
   let newArr = []
   while (arr) {
@@ -267,17 +259,14 @@ function shuffleArr(arr) {
 router.get('/decks/:id/quiz', function(req, res) {
   models.Card.findAll({ where: { deckId: req.params.id } })
   .then(function(data) {
+    
     let length = data.length
-    // console.log('data*********\n', data)
     let newArr = []
-    for (let i = 0; i < length; i++) {
-      console.log('data.length', data.length);
-      let iDunSplicedThis = (data.splice(Math.floor(Math.random() * data.length), 1)[0])
-      newArr.push(iDunSplicedThis)
-      console.log('*****\n*********\n*************\n', iDunSplicedThis);
-    }
 
-    console.log('newArr*******\n', newArr)
+    for (let i = 0; i < length; i++) {
+      let splicedIndex = (data.splice(Math.floor(Math.random() * data.length), 1)[0])
+      newArr.push(splicedIndex)
+    }
 
     res.render('quiz', { data: newArr })
   })
