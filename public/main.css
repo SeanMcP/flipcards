@@ -127,13 +127,13 @@ header a:hover, header a:active {
   font-weight: 700;
 }
 .simpleCard h2 {
-  border-bottom: 1px solid pink;
+  /*border-bottom: 1px solid pink;*/
   font-size: 1.25em;
   font-weight: bold;
 }
 .simpleCard p.body {
   font-size: 1em;
-  margin: 20px 0 0;
+  margin: 15px 0 0;
 }
 .description {
   font-style: italic;
@@ -177,8 +177,9 @@ button:hover, button:active {
   margin: 5px 0 0;
 }
 .displayCard {
+  background: white url('/img/card-bg.png') top left repeat-x;
   margin: 15px;
-  padding: 15px 0;
+  padding: 15px 5px;
 }
 .displayCard h2 {
   padding: 0 10px 5px;
@@ -206,6 +207,14 @@ button:hover, button:active {
   position: relative;
   height: 300px;
   width: 500px;
+}
+#quizDirections {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.5em;
+  margin: 15px auto 30px;
+  max-width: 500px;
+  text-align: center;
 }
 .quizFront, .quizBack {
   align-items: center;
