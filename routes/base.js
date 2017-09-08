@@ -137,7 +137,7 @@ router.get('/decks/:id', isAuthenticated, function(req, res) {
   })
 })
 
-router.get('/decks/:id/edit', function(req, res) {
+router.get('/decks/:id/edit', isAuthenticated, function(req, res) {
   models.Deck.findOne({ where: { id: req.params.id } })
   .then(function(data) {
     res.render('editDeck', { user: req.user, data: data })
@@ -147,7 +147,7 @@ router.get('/decks/:id/edit', function(req, res) {
   })
 })
 
-router.post('/decks/:id/edit', function(req, res) {
+router.post('/decks/:id/edit', isAuthenticated, function(req, res) {
   models.Deck.update({
     name: req.body.name,
     description: req.body.description
