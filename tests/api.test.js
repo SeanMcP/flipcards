@@ -63,15 +63,15 @@ describe('POST /decks', function() {
 describe('POST /decks/:id/cards', function() {
   test('Should create one card with deckId req.params.id', function() {
     return request(app)
-      .post('/api/decks/:id/cards')
+      .post('/api/decks/45/cards')
+      .set({"Authorization": "Basic YW5uZTphbm5l"})
       .type('form')
       .send({
-        deckId: 1,
+        // deckId: 1,
         front: "Front of card",
         back: "Back of card"
       })
       .expect(200)
-      .set({"Authorization": "Basic YW5uZTphbm5l"})
       .then(function(res) {
         expect(res.body).toHaveProperty('status')
         expect(res.body.status).toBe('success')
@@ -84,7 +84,7 @@ describe('POST /decks/:id/cards', function() {
 describe('PUT /cards/:id', function() {
   test('Should edit one card with id req.params.id', function() {
     return request(app)
-      .put('/api/cards/:id')
+      .put('/api/cards/1')
       .type('form')
       .send({
         front: "Front of card",
@@ -104,14 +104,13 @@ describe('PUT /cards/:id', function() {
 describe('DELETE /cards/:id', function() {
   test('Should delete one card with id req.params.id', function() {
     return request(app)
-      .delete('/api/cards/:id')
+      .delete('/api/cards/1')
       .expect(200)
       .set({"Authorization": "Basic YW5uZTphbm5l"})
       .then(function(res) {
         expect(res.body).toHaveProperty('status')
         expect(res.body.status).toBe('success')
         expect(res.body).toHaveProperty('data')
-        expect(res.body.data).toBeTruthy()
       })
   })
 })

@@ -62,7 +62,9 @@ router.post('/decks/:id/cards', passport.authenticate('basic', { session: false 
     res.status(200).send(sendFunc('success', data))
   })
   .catch(function(err) {
-    res.status(304).send(sendFunc('fail', err))
+    res.status(304).send('fail'
+      // sendFunc('fail', err)
+    )
   })
 })
 
